@@ -25,6 +25,16 @@ switch(params[0]) {
       spotifyIt(x);
     }
       break;
+    case "movie-this":
+    if(params[1]){  //if a movie is inserted in 4th paramater go to function
+        x = params[1]
+      myMovie(x);
+    
+    } else {  //if blank call Mr. Nobody"
+       x = "Mr.Nobody"
+      myMovie(x);
+    }
+      break;
 };
 
 
@@ -60,13 +70,13 @@ function twitter(){
 };
 //end twitter things
 
-request('http://www.google.com', function (error, response, body) {
-  console.log('error:', error); // Print the error if one occurred
-  console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-  console.log('body:', body); // Print the HTML for the Google homepage.
-});
-
-
-request("http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&r=json&apikey=84c7b42c", function(error,data,body) {
-      console.log(data.Title);   
-});
+//movie stuff
+function myMovie(){
+    request("http://www.omdbapi.com/?t=Godfather&y=&plot=short&r=json&apikey=84c7b42c", function(error,data,body) {
+    console.log(data.body)
+        // console.log(data.body.Year);
+        // console.log(body.Ratings[0].Value); 
+           
+    });
+};
+//end movie stuff
