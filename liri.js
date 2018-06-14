@@ -1,12 +1,12 @@
 require("dotenv").config();
 var request = require('request');
-
+var fs = require('fs');
 const keys = require('./keys.js');
 var Spotify = require('node-spotify-api');
-
+var Twitter = require('twitter');
 
 var spotify = new Spotify(keys.spotify);
-var Twitter = require('twitter');
+
 var client = new Twitter(keys.twitter)
 
 
@@ -27,9 +27,8 @@ switch(params[0]) {
       break;
     case "movie-this":
     if(params[1]){  //if a movie is inserted in 4th paramater go to function
-        x = params[1]
+        x = params[1];
       myMovie(x);
-    
     } else {  //if blank call Mr. Nobody"
        x = "Mr.Nobody"
       myMovie(x);
@@ -71,12 +70,23 @@ function twitter(){
 //end twitter things
 
 //movie stuff
-function myMovie(){
-    request("http://www.omdbapi.com/?t=Godfather&y=&plot=short&r=json&apikey=84c7b42c", function(error,data,body) {
-    console.log(data.body)
-        // console.log(data.body.Year);
-        // console.log(body.Ratings[0].Value); 
+function myMovie(snapshot){
+
+    request("http://www.omdbapi.com/?t="+snapshot+"&y=&plot=short&r=json&apikey=84c7b42c", function(error,data,body) {
+     var obj = JSON.parse(data.body)
+      console.log(obj.Title);
+      console.log(obj.Year);
+      console.log(obj.imdbRating);
+      console.log(obj.Country);
+      console.log(obj.Language);
+      console.log(obj.Plot);
+      console.log(obj.Actors);
            
     });
 };
 //end movie stuff
+
+fs.readFile('log.txt', 'utf8', function(err, data) {  
+  if (err) throw err;
+  console.log(data);
+});
