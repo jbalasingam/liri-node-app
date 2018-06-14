@@ -34,6 +34,9 @@ switch(params[0]) {
       myMovie(x);
     }
       break;
+    case "do-what-it-says":
+    readfile();
+    break;
 };
 
 
@@ -86,7 +89,14 @@ function myMovie(snapshot){
 };
 //end movie stuff
 
-fs.readFile('log.txt', 'utf8', function(err, data) {  
-  if (err) throw err;
-  console.log(data);
-});
+//start read file stuff
+function readfile(){
+    fs.readFile('random.txt', 'utf8', function(err, data) {  
+      if (err) throw err;
+      console.log(data);
+      x=data.split(/"/)[1];
+      spotifyIt(x);
+
+    });
+}
+//end read file stuff
