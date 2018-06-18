@@ -76,7 +76,7 @@ function twitter(){
 function myMovie(snapshot){
 
     request("http://www.omdbapi.com/?t="+snapshot+"&y=&plot=short&r=json&apikey=84c7b42c", function(error,data,body) {
-     var obj = JSON.parse(data.body)
+    var obj = JSON.parse(data.body)
       console.log(obj.Title);
       console.log(obj.Year);
       console.log(obj.imdbRating);
